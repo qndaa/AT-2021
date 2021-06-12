@@ -39,6 +39,7 @@ public class WSEndPoint {
 	@OnOpen
 	public void onOpen(Session session, @PathParam("username") String username) {
 
+		System.out.println(System.getProperty("jboss.node.name"));
 		System.out.println("Sessia id: " + session.getId());
 		System.out.println("Username: " + username);
 		System.out.println("Number opened sesion: " + (sessions.keySet().size() + 1));

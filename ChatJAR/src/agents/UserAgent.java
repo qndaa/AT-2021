@@ -50,6 +50,7 @@ public class UserAgent implements Agent {
 		
 		System.out.println("Agent handled message: " + msg.getOperation());
 		
+		
 		switch (msg.getOperation()) {
 		case "REGISTRATION":	
 			if(chatManager.registerRemote(new User(msg.getParam("username"), msg.getParam("password")))) {
