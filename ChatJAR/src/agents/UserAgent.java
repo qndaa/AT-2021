@@ -23,8 +23,8 @@ import ws.WSEndPoint;
  *
  */
 @Stateful
-@Remote(Agent.class)
-public class UserAgent implements Agent {
+@Remote(AgentChatInt.class)
+public class UserAgent implements AgentChatInt {
 
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class UserAgent implements Agent {
 	private static final long serialVersionUID = 1L;
 	private String agentId;
 	@EJB
-	private CachedAgentsRemote cachedAgents;
+	private CachedChatAgentsRemote cachedAgents;
 
 	@EJB
 	private ChatManagerRemote chatManager;

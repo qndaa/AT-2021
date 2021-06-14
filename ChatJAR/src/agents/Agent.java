@@ -1,14 +1,18 @@
 package agents;
 
-import java.io.Serializable;
+import javax.ejb.Remote;
 
-import javax.jms.Message;
+import models.ACLMessage;
+import models.AID;
 
-import messagemanager.AgentMessage;
+@Remote
+public interface Agent {
+	
+	String SIEBOG_MODULE = "siebog-jar";
+	String SIEBOG_EAR = "siebog-ear";
+	String SIEBOG_WAR = "siebog-war";
 
-public interface Agent extends Serializable {
-
-	public String init(String id);
-	public void handleMessage(AgentMessage message);
-	public String getAgentId();
+	public void init(AID aid);
+	public void handleMessage(ACLMessage msg);
+	public AID getAID();
 }

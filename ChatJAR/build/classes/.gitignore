@@ -1,4 +1,6 @@
 /agents/
-/models/
-/rest/
 /util/
+/rest/
+/agentmanager/
+/models/
+/messagemanager/

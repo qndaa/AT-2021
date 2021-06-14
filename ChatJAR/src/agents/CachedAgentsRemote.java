@@ -1,11 +1,18 @@
 package agents;
 
-import java.util.HashMap;
+
+import java.util.List;
+
+import models.AID;
 
 public interface CachedAgentsRemote {
 
-	public HashMap<String, Agent> getRunningAgents();
-	public void addRunningAgent(String key, Agent agent);
-	public void stopAgent(String id);
-	public Agent getAgent(String id);
+	boolean containsKey(AID aid);
+
+	void put(AID aid, Agent agent);
+
+	List<AID> getKeySet();
+
+	void deleteAgent(AID aid);
+
 }

@@ -1,41 +1,51 @@
 package rest;
 
-import javax.ejb.Remote;
-import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
+import java.util.List;
+import java.util.Set;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
-@Remote
+import org.jboss.resteasy.annotations.Body;
+
+import agents.AgentClass;
+import models.AID;
+
 public interface ATAgentRest {
 	
 	@GET
 	@Path("/classes")
-	public void getAllClasses(@Context HttpServletRequest request);
+	public List<AgentClass> getAllClasses();
 	
 	@GET
 	@Path("/running")
-	public void getRunningAgents(@Context HttpServletRequest request);
+	public List<AID> getRunningAgents();
 	
 	@PUT
 	@Path("/running/{type}/{name}")
-	public void runningAgent(@Context HttpServletRequest request, @PathParam("type") String type, @PathParam("name") String name);
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public AID runningAgent( @PathParam("type") String type, @PathParam("name") String name);
 	
 	@DELETE
-	@Path("/running/{aid}")
-	public void deleteRunningAgent(@Context HttpServletRequest request, @PathParam("aid") String aid);
+	@Path("/running")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteRunningAgent(AID aid);
 	
 	@POST
 	@Path("/messages")
-	public void sendACLMessage(@Context HttpServletRequest request);
+	public void sendACLMessage();
 	
 	@GET
 	@Path("/messages")
-	public void getMessages(@Context HttpServletRequest request);
+	public List<String> getPerformatives();
 	
 
 }

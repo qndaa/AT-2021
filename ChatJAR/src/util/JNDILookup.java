@@ -6,22 +6,22 @@ import javax.naming.NamingException;
 
 import agentmanager.AgentManagerBean;
 import agentmanager.AgentManagerRemote;
-import agents.Agent;
+import agents.AgentChatInt;
 import agents.UserAgent;
 import chatmanager.ChatManagerBean;
 import chatmanager.ChatManagerRemote;
-import messagemanager.MessageManagerBean;
-import messagemanager.MessageManagerRemote;
+import messagemanager.ChatMessageManagerBean;
+import messagemanager.ChatMessageManager;
 
 public abstract class JNDILookup {
 
 	public static final String JNDIPathChat = "ejb:ChatEAR/ChatJAR//";
 	public static final String AgentManagerLookup = JNDIPathChat + AgentManagerBean.class.getSimpleName() + "!"
 			+ AgentManagerRemote.class.getName();
-	public static final String MessageManagerLookup = JNDIPathChat + MessageManagerBean.class.getSimpleName() + "!"
-			+ MessageManagerRemote.class.getName();
+	public static final String MessageManagerLookup = JNDIPathChat + ChatMessageManagerBean.class.getSimpleName() + "!"
+			+ ChatMessageManager.class.getName();
 	public static final String UserAgentLookup = JNDIPathChat + UserAgent.class.getSimpleName() + "!"
-			+ Agent.class.getName() + "?stateful";
+			+ AgentChatInt.class.getName() + "?stateful";
 	public static final String ChatManagerLookup = JNDIPathChat + ChatManagerBean.class.getSimpleName() + "!" +
 			ChatManagerRemote.class.getName();
 	//public static final String ChatAgentLookup = JNDIPathChat + ChatAgent.class.getSimpleName() + "!"

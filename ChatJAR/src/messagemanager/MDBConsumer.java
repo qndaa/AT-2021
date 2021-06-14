@@ -8,8 +8,8 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 
-import agents.Agent;
-import agents.CachedAgentsRemote;
+import agents.AgentChatInt;
+import agents.CachedChatAgentsRemote;
 
 /**
  * Message-Driven Bean implementation class for: MDBConsumer
@@ -21,7 +21,7 @@ public class MDBConsumer implements MessageListener {
 
 
 	@EJB
-	private CachedAgentsRemote cachedAgents;
+	private CachedChatAgentsRemote cachedAgents;
 	
 	
 	
@@ -38,7 +38,7 @@ public class MDBConsumer implements MessageListener {
 	public void onMessage(Message message) {
 		try {
 			AgentMessage agentMessage = (AgentMessage) ((ObjectMessage) message).getObject();
-			Agent agent = cachedAgents.getAgent(agentMessage.getSender());
+			AgentChatInt agent = cachedAgents.getAgent(agentMessage.getSender());
 			if (agent != null)
 				agent.handleMessage(agentMessage);
 		} catch (JMSException e) {

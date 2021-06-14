@@ -3,6 +3,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./Home";
 import Chat from "./Chat";
 import Forbidden from "./Forbidden";
+import AT from "./AT";
 
 class App extends React.Component {
 
@@ -135,7 +136,8 @@ class App extends React.Component {
 
                             />}
                         />
-                        <Route path={'/forbidden'} exaxt={true} component={Forbidden} />
+                        <Route path={`/AT`} exact={true} component={AT}/>
+                        <Route path={'/forbidden'} exact={true} component={Forbidden} />
                     </div>
                 </BrowserRouter>
             </div>

@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response.Status;
 import chatmanager.ChatManagerBean;
 import chatmanager.ChatManagerRemote;
 import messagemanager.AgentMessage;
-import messagemanager.MessageManagerRemote;
+import messagemanager.ChatMessageManager;
 import models.User;
 
 @Stateless
@@ -26,7 +26,7 @@ public class ChatBeanRest implements ChatRest {
 	
 	
 	@EJB
-	MessageManagerRemote msm;
+	ChatMessageManager msm;
 	
 	@EJB
 	ChatManagerRemote chm;

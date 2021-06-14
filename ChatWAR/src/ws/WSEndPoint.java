@@ -46,7 +46,7 @@ public class WSEndPoint {
 		
 		if(!sessions.keySet().contains(session)) {
 					
-			agm().startAgent(session.getId(),  JNDILookup.UserAgentLookup);
+			agm().startChatAgent(session.getId(),  JNDILookup.UserAgentLookup);
 			if (username.equals("")) {
 				sessions.put(session, null);
 			} else {

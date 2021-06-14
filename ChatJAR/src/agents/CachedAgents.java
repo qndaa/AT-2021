@@ -1,50 +1,68 @@
 package agents;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Singleton;
 
-/**
- * Session Bean implementation class CachedAgents
- */
+import models.AID;
+
 @Singleton
 @LocalBean
 @Remote(CachedAgentsRemote.class)
-public class CachedAgents implements CachedAgentsRemote{
+public class CachedAgents implements CachedAgentsRemote {
 
-	HashMap<String, Agent> runningAgents;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private HashMap<AID, Agent> runningAgents = new HashMap<AID, Agent>();
 
 	/**
 	 * Default constructor.
 	 */
 	public CachedAgents() {
 
-		runningAgents = new HashMap<>();
+		//this.runningAgents = new HashMap<>();
 	}
 
 	@Override
-	public HashMap<String, Agent> getRunningAgents() {
-		return runningAgents;
+	public boolean containsKey(AID aid) {
+		return this.runningAgents.containsKey(aid);
 	}
 
 	@Override
-	public void addRunningAgent(String key, Agent agent) {
-		runningAgents.put(key, agent);
+	public void put(AID aid, Agent agent) {
+		this.runningAgents.put(aid, agent);
+		System.out.println(runningAgents.size());
 	}
 
 	@Override
-	public void stopAgent(String id) {
-		runningAgents.remove(id);
+	public List<AID> getKeySet() {
+		ArrayList<AID> ret = new ArrayList<AID>();
+
+		if (!this.runningAgents.isEmpty()) {
+			for (AID aid : this.runningAgents.keySet()) {
+				ret.add(aid);
+			}
+		}
+		return ret; 
 	}
 
 	@Override
-	public Agent getAgent(String id) {
-		
-		return this.runningAgents.get(id);
+	public void deleteAgent(AID aid) {
+		this.runningAgents.remove(aid);
+		System.out.println(runningAgents.size());
 	}
+
 	
 	
-
+	
+	
+	
+	
 }

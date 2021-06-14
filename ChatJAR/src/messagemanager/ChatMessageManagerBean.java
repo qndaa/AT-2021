@@ -1,9 +1,13 @@
 package messagemanager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -12,17 +16,20 @@ import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
 
+import models.Performative;
+
 /**
  * Session Bean implementation class MessageManagerBean
  */
 @Stateless
 @LocalBean
-public class MessageManagerBean implements MessageManagerRemote {
+@Remote(ChatMessageManager.class)
+public class ChatMessageManagerBean implements ChatMessageManager {
 
 	/**
 	 * Default constructor.
 	 */
-	public MessageManagerBean() {
+	public ChatMessageManagerBean() {
 	}
 
 	@EJB
@@ -74,6 +81,16 @@ public class MessageManagerBean implements MessageManagerRemote {
 	@Override
 	public MessageConsumer getConsumer() {
 		return factory.getConsumer(session);
+	}
+
+	@Override
+	public List<String> getPerformatives() {
+		Performative[] performatives = Performative.values();
+		List<String> ret = new ArrayList<String>(performatives.length);
+		for (Performative p : performatives) {
+			ret.add(p.toString());
+		}
+		return ret;
 	}
 
 
