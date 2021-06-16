@@ -2,6 +2,8 @@ import React from "react";
 import at from "../api/at";
 import AvailableClassAgents from "./AT/AvailableClassAgents";
 import CreatedAgents from "./AT/CreatedAgents";
+import Message from "./AT/Message";
+import Console from "./AT/Console";
 
 class AT extends React.Component {
 
@@ -82,54 +84,22 @@ class AT extends React.Component {
                     </div>
 
                     <div className={`col-6`}>
-                        <h4 className={`text-dark font-weight-bold mb-3`}>Send message:</h4>
-                        <form>
-                            <div className="form-group">
-                                <label htmlFor="performatives">Performative:</label>
-                                <select className="form-control" id="performatives">
-                                    <option value={`Choose...`}>Choose...</option>
-                                    {this.renderPerformatives()}
-                                </select>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="exampleFormControlInput1">Email address</label>
-                                <input type="email" className="form-control" id="exampleFormControlInput1"
-                                       placeholder="name@example.com"/>
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="exampleFormControlSelect2">Example multiple select</label>
-                                <select multiple className="form-control" id="exampleFormControlSelect2">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="exampleFormControlTextarea1">Example textarea</label>
-                                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
-                        </form>
-
-
-
-
+                        <Message
+                            performatives={this.state.performatives}
+                            createdAgents={this.state.createdAgents}
+                            clearMessage={this.componentDidMount}
+                        />
                     </div>
-
+                </div>
+                <div className={`w-100`}>
+                    <Console/>
                 </div>
             </div>
 
         );
     }
 
-    renderPerformatives = () => {
-        return this.state.performatives.map((performative) => {
 
-            return <option key={performative} value={performative}>{performative}</option>
-        })
-    }
 
 
 }

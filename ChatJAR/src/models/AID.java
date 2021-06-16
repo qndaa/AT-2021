@@ -13,14 +13,18 @@ public class AID implements Serializable{
 	private String name;
 	private String host;
 	private AgentType agentType;
+	private String str;
 	
-	public AID() {}
+	public AID() {
+		this.str = "";
+	}
 
 	
 	public AID(String name, String host, String type) {
 		this.name = name;
 		this.host = host;
 		this.agentType = new AgentType(type);
+		this.str = name + "@" + host;
 	}
 	
 	public AID(String name, String host, AgentType agentType) {
@@ -88,6 +92,9 @@ public class AID implements Serializable{
 		return true;
 	}
 	
+	public String getStr() {
+		return str;
+	}
 	
 	
 	

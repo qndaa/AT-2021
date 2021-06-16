@@ -11,6 +11,7 @@ class CreatedAgents extends React.Component {
 
     deleteAgent = () => {
         this.props.deletedAgent(this.state.selectedAgent);
+        this.setState({selectedAgent: 'Choose...'});
     }
 
     changeSelectedAgent = (event) => {

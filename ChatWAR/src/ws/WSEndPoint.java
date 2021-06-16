@@ -76,6 +76,27 @@ public class WSEndPoint {
 	@OnMessage
 	public void echoTextMessage(String msg) {
 		
+		if(msg == "RELOAD") {
+			for (Session s : sessions.keySet()) {
+				if(s != null && s.isOpen()) {
+					try {
+						s.getBasicRemote().sendText("RELOAD");
+					} catch (IOException e) {
+						try {
+							s.close();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						e.printStackTrace();
+					}
+				}
+			}
+			return;
+		}
+		
+		
+		
+		
 		String tokens [] = msg.split(" ");
 		String agentId = tokens[1].split(":")[1];
 				

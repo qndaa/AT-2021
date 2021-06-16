@@ -1,13 +1,11 @@
 package rest;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,7 +13,8 @@ import javax.ws.rs.core.MediaType;
 
 import agentmanager.AgentManagerRemote;
 import agents.AgentClass;
-import messagemanager.ChatMessageManager;
+import messagemanager.MessageManager;
+import models.ACLMessage;
 import models.AID;
 
 @Stateless
@@ -30,7 +29,7 @@ public class ATAgentBeanRest implements ATAgentRest {
 	AgentManagerRemote agm;
 
 	@EJB
-	ChatMessageManager msm;
+	MessageManager msm;
 	
 
 	@Override
@@ -47,20 +46,17 @@ public class ATAgentBeanRest implements ATAgentRest {
 
 	@Override
 	public AID runningAgent(String type, String name) {
-		// TODO Auto-generated method stub
 		return agm.startAgent(type, name);
 	}
 
 	@Override
 	public void deleteRunningAgent(AID aid) {
-		// TODO Auto-generated method stub	
 		agm.deleteAgent(aid);
 	}
 
 	@Override
-	public void sendACLMessage() {
-		// TODO Auto-generated method stub
-		
+	public void sendACLMessage(ACLMessage message) {
+		msm.post(message);
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import models.AgentType;
 import util.JNDILookup;
 import util.JNDITreeParser;
 import util.NodeManager;
+import ws.WSEndPoint;
 
 /**
  * Session Bean implementation class AgentManagerBean
@@ -35,6 +36,8 @@ public class AgentManagerBean implements AgentManagerRemote {
 	@EJB
 	private CachedAgentsRemote cachedAgents;
 	
+	
+	
     public AgentManagerBean() {
         
     }
@@ -52,12 +55,14 @@ public class AgentManagerBean implements AgentManagerRemote {
 
 	@Override
 	public void stopAgent(String id) {
+		
 		cachedChatAgents.stopAgent(id);
 	}
 	
 	@Override
 	public List<AgentClass> getAvailableAgentClasses() {
 		try {
+			//ws.
 			return jndiTreeParser.parse();
 		} catch (Exception ex) {
 			throw new IllegalStateException(ex);

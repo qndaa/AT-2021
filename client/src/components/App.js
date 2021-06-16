@@ -10,7 +10,16 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {registeredUsers: null, loggedInUsers: null, messages: null, messageContent: '', selectedOption: 'ALL'}
+        this.state = {
+            registeredUsers: null,
+            loggedInUsers: null,
+            messages: null,
+            messageContent: '',
+            selectedOption: 'ALL',
+            reload: false
+        }
+
+        this.child = React.createRef();
     }
 
     componentDidMount = () => {
@@ -22,7 +31,7 @@ class App extends React.Component {
         localStorage.getItem('username') == null ? username = '' : username = localStorage.getItem('username');
         localStorage.getItem('numOfSessions') == null ? numOfSessions = 0 : numOfSessions = localStorage.getItem('numOfSessions');
 
-        const url = "ws://localhost:8080/ChatWAR/ws/" + username;
+        const url = "ws://qndaa-ideapad-5-14iil05:8080/ChatWAR/ws/" + username;
         let socket;
 
         try{
@@ -88,12 +97,11 @@ class App extends React.Component {
 
                 } else if (msg.data.startsWith('REDIRECT')) {
                     //this.state.history.push('/chat');
-                }
-
-
-                else {
-
-
+                } else if (msg.data.startsWith('RELOAD')) {
+                    if (this.child.current != null) {
+                        this.child.current.componentDidMount();
+                    }
+                } else {
                     console.log('onmessage: Received: '+ msg.data);
                     sessionId = msg.data.split(":")[1];
                     localStorage.setItem('sessionId', sessionId);
@@ -136,7 +144,9 @@ class App extends React.Component {
 
                             />}
                         />
-                        <Route path={`/AT`} exact={true} component={AT}/>
+                        <Route path={`/AT`} exact={true} component={AT}>
+                            <AT ref={this.child}/>
+                        </Route>
                         <Route path={'/forbidden'} exact={true} component={Forbidden} />
                     </div>
                 </BrowserRouter>

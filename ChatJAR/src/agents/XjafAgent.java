@@ -16,4 +16,6 @@ public abstract class XjafAgent implements Agent {
 	public AID getAID() {
 		return this.aid;
 	}
+	
+	
 }

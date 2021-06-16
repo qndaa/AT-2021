@@ -1,7 +1,6 @@
 package rest;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -13,9 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.jboss.resteasy.annotations.Body;
-
 import agents.AgentClass;
+import models.ACLMessage;
 import models.AID;
 
 public interface ATAgentRest {
@@ -41,7 +39,7 @@ public interface ATAgentRest {
 	
 	@POST
 	@Path("/messages")
-	public void sendACLMessage();
+	public void sendACLMessage(ACLMessage message);
 	
 	@GET
 	@Path("/messages")
