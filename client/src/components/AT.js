@@ -4,6 +4,7 @@ import AvailableClassAgents from "./AT/AvailableClassAgents";
 import CreatedAgents from "./AT/CreatedAgents";
 import Message from "./AT/Message";
 import Console from "./AT/Console";
+import handshake from "../api/handshake";
 
 class AT extends React.Component {
 
@@ -27,6 +28,12 @@ class AT extends React.Component {
         await at.get('agents/classes').then((classes) => {
             this.setState({classes: classes.data});
         });
+
+        await handshake.post('/node', {
+            "host": window.location.hostname, "port": 8080
+        })
+
+        console.log(window.location)
     }
 
     deleteAgent = async (index) => {

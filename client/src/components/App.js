@@ -31,7 +31,7 @@ class App extends React.Component {
         localStorage.getItem('username') == null ? username = '' : username = localStorage.getItem('username');
         localStorage.getItem('numOfSessions') == null ? numOfSessions = 0 : numOfSessions = localStorage.getItem('numOfSessions');
 
-        const url = "ws://qndaa-ideapad-5-14iil05:8080/ChatWAR/ws/" + username;
+        const url = "ws://"+ window.location.hostname +":8080/ChatWAR/ws/" + username;
         let socket;
 
         try{

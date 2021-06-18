@@ -36,6 +36,7 @@ public class WSEndPoint {
 		return (ChatManagerRemote) JNDILookup.lookUp(JNDILookup.ChatManagerLookup, ChatManagerBean.class);
 	}
 	
+	
 	@OnOpen
 	public void onOpen(Session session, @PathParam("username") String username) {
 

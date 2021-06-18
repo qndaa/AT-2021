@@ -13,7 +13,7 @@ class Console extends React.Component {
 
 
         try {
-            let socket = new WebSocket("ws://qndaa-ideapad-5-14iil05:8080/ChatWAR/ws/console");
+            let socket = new WebSocket("ws://" + window.location.hostname +":8080/ChatWAR/ws/console");
 
             localStorage.getItem('consoleId') == null ? consoleId = '' : consoleId = localStorage.getItem('consoleId');
 
