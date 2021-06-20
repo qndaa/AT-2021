@@ -33,7 +33,8 @@ class AT extends React.Component {
             "host": window.location.hostname, "port": 8080
         })
 
-        console.log(window.location)
+        console.log(window.location);
+
     }
 
     deleteAgent = async (index) => {

@@ -62,7 +62,7 @@ public class Console {
 	
 		for(Session s : sessions) {
 			try {
-				s.getBasicRemote().sendText("CONSOLE&" + msg);
+				s.getBasicRemote().sendText("CONSOLE&" + msg + "\n\n");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

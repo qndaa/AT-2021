@@ -28,7 +28,7 @@ class Console extends React.Component {
 
                 if (msg.data.startsWith('CONSOLE&')) {
                     const cont = msg.data.split('&')[1];
-                    this.setState({consoleContent: this.state.consoleContent + '\n\n' + new Date().toLocaleTimeString() + '---' + cont});
+                    this.setState({consoleContent: this.state.consoleContent + new Date().toLocaleTimeString() + '---' + cont});
 
                 } else {
                     console.log('onmessage console: Received: '+ msg.data);

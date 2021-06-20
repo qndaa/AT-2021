@@ -1,6 +1,7 @@
 package rest;
 
-import javax.ejb.Remote;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -10,9 +11,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import agents.AgentClass;
 import models.AgentCenter;
 
-@Remote
+
 public interface ClasterRest {
 
 	@POST
@@ -22,11 +24,11 @@ public interface ClasterRest {
 	
 	@GET
 	@Path("/agents/classes")
-	public void getAgentTypeFromNewNode(@Context HttpServletRequest request);
+	public  List<AgentClass> getAgentTypeFromNewNode();
 	
 	@POST
 	@Path("/agents/classes")
-	public void sendAgentTypeToAllNodes(@Context HttpServletRequest request);
+	public void sendAgentTypeToAllNodes(AgentCenter ac);
 
 	@POST
 	@Path("/nodes")
