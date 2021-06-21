@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.Remote;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import javax.ejb.TimerService;
 
 import models.AgentCenter;
-import util.NodeManager;
 
 @Singleton
 @Startup
@@ -20,11 +19,13 @@ public class AgentCenterManagerBean implements AgentCenterManagerRemote {
 
 	List<AgentCenter> centers = new ArrayList<AgentCenter>();
 	
+	@Resource
+	TimerService timerService;
+	
 	 public AgentCenterManagerBean() {}
 	
 	@PostConstruct
 	public void init() {
-		
 	}
 
 	
@@ -40,5 +41,16 @@ public class AgentCenterManagerBean implements AgentCenterManagerRemote {
 		this.centers.add(ac);
 		return ac;
 	}
+
+	
+
+	@Override
+	public void remove(AgentCenter ac) {
+		if (this.centers.contains(ac)) {
+			this.centers.remove(ac);		
+		}
+	}
+
+	
 	
 }

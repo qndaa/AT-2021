@@ -10,8 +10,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import agents.AgentClass;
+import models.AID;
 import models.AgentCenter;
 
 
@@ -45,4 +48,15 @@ public interface ClasterRest {
 	@Path("/getHost")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getHost();
+	
+	@GET
+	@Path("/ping")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String ping();
+
+	@POST
+	@Path("/agents/running")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void sendRunningAgent(List<AID> runningAgents);
+	
 }
