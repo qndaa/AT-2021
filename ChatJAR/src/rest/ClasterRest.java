@@ -24,15 +24,22 @@ public interface ClasterRest {
 	
 	@GET
 	@Path("/agents/classes")
+	@Produces(MediaType.APPLICATION_JSON)
 	public  List<AgentClass> getAgentTypeFromNewNode();
+	
+	
+	
+	@POST
+	@Path("/nodes")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void sayOtherNodes(AgentCenter ac);
 	
 	@POST
 	@Path("/agents/classes")
-	public void sendAgentTypeToAllNodes(AgentCenter ac);
+	@Consumes(value =  MediaType.APPLICATION_JSON)
+	public void sendClasses(List<AgentClass> classes);
 
-	@POST
-	@Path("/nodes")
-	public void sendNodesToNewNode(@Context HttpServletRequest request);
+
 	
 	@GET
 	@Path("/getHost")

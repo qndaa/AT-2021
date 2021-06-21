@@ -24,14 +24,6 @@ public class AgentCenterManagerBean implements AgentCenterManagerRemote {
 	
 	@PostConstruct
 	public void init() {
-		System.out.println("AGENTSKI CENTAT:             " + NodeManager.getNodeName());
-		if (NodeManager.getNodeName() == AgentCenter.MASTER_NODE) {
-			System.out.println("UUUUUUUUUUUUUU master cvoru smo");
-		}
-		
-	
-		
-		centers.add(new AgentCenter(NodeManager.getNodeName(), 8080));
 		
 	}
 

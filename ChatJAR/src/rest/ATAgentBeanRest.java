@@ -31,6 +31,10 @@ public class ATAgentBeanRest implements ATAgentRest {
 	@EJB
 	MessageManager msm;
 	
+	public ATAgentBeanRest() {
+		// TODO Auto-generated constructor stub
+	}
+	
 
 	@Override
 	public List<AgentClass> getAllClasses() {
