@@ -74,11 +74,11 @@ public class GameRestBean implements GameRest {
 			}
 			
 			
-			
+			System.out.println("DJOLELEEEEE" + gm.getGames());
+
 			
 		
 		}
-		System.out.println("DJOLELEEEEE" + gm.getGames());
 
 	}
 
@@ -91,7 +91,7 @@ public class GameRestBean implements GameRest {
 		message.getReceivers().add(aidSpider);
 		message.setPerformative(Performative.REQUEST);
 		message.setContent("GAME");
-		System.out.println(JSON.g.toJson(message));
+		//System.out.println(JSON.g.toJson(message));
 		msm.post(message);
 		
 		try {
@@ -100,6 +100,8 @@ public class GameRestBean implements GameRest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		System.out.println(gm.getGames());
 		
 		if (!NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
 			

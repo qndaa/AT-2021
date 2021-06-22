@@ -46,16 +46,16 @@ public class SpiderAgent extends XjafAgent {
 			
 			System.out.println(games);
 			
-			if (!NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
-			
-				ResteasyClient client = new ResteasyClientBuilder().build();
-				ResteasyWebTarget rtarget = client.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/games");
-				GameRest cr = rtarget.proxy(GameRest.class);
-				cr.saveSearch(games);
-			
-			} else {
-				gm.concanate(games);
-			}
+//			if (!NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
+//			
+//				ResteasyClient client = new ResteasyClientBuilder().build();
+//				ResteasyWebTarget rtarget = client.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/games");
+//				GameRest cr = rtarget.proxy(GameRest.class);
+//				cr.saveSearch(games);
+//			
+//			} else {
+			gm.concanate(games);
+//			}
 			
 		}
 		
