@@ -187,15 +187,24 @@ public class ClasterBeanRest implements ClasterRest{
 	
 	@Override
 	public List<AID> getRunningAgents() {
-		ResteasyClient client = new ResteasyClientBuilder().build();
 		List<AID> ret = new ArrayList<AID>();
-		for(AgentCenter ac: this.agentCenterManager.getAgentCenters()) {
-			ResteasyWebTarget target = client.target("http://" + ac.getHost() + ":8080/ChatWAR/rest/agents");
-			ATAgentRest cr = target.proxy(ATAgentRest.class);
-			ret.addAll(cr.getRunningAgents());
+		ResteasyClient client = new ResteasyClientBuilder().build();
+
+		if (NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
+			for(AgentCenter ac: this.agentCenterManager.getAgentCenters()) {
+				ResteasyWebTarget target = client.target("http://" + ac.getHost() + ":8080/ChatWAR/rest/agents");
+				ATAgentRest cr = target.proxy(ATAgentRest.class);
+				ret.addAll(cr.getRunningAgents());
+			}
+			
+		} else {
+			ResteasyWebTarget target = client.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/handshake");
+			ClasterRest cr = target.proxy(ClasterRest.class);
+			ret = cr.getRunningAgents();
 		}
-		return ret;
 		
+		
+		return ret;
 	}
 
 	@Override

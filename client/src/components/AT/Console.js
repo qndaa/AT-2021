@@ -25,13 +25,12 @@ class Console extends React.Component {
 
             socket.onmessage = (msg) => {
                 console.log(msg.data);
-
-                if (msg.data.startsWith('CONSOLE&')) {
+                if (msg.data.startsWith('CONSOLE&RELOAD')) {
+                    this.props.reload();
+                } else if (msg.data.startsWith('CONSOLE&')) {
                     const cont = msg.data.split('&')[1];
                     this.setState({consoleContent: this.state.consoleContent + new Date().toLocaleTimeString() + '---' + cont});
 
-                } else if (msg.data.startsWith('RELOAD')) {
-                    this.props.reload();
                 }
 
 
