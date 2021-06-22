@@ -17,6 +17,7 @@ import agentcentermanager.AgentCenterManagerRemote;
 import agentmanager.AgentManagerRemote;
 import agents.AgentClass;
 import console.Console;
+import models.ACLMessage;
 import models.AID;
 import models.AgentCenter;
 import util.JSON;
@@ -225,6 +226,25 @@ public class ClasterBeanRest implements ClasterRest{
 			
 		} else {
 			console.echoTextMessage("RELOAD");
+		}
+		
+	}
+
+	@Override
+	public void sendACLMessage(ACLMessage message) {
+		ResteasyClient client = new ResteasyClientBuilder().build();
+
+		if (NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
+			for(AgentCenter ac: this.agentCenterManager.getAgentCenters()) {
+				ResteasyWebTarget target = client.target("http://" + ac.getHost() + ":8080/ChatWAR/rest/agents");
+				ATAgentRest cr = target.proxy(ATAgentRest.class);
+				cr.sendACLMessage(message);
+			}
+			
+		} else {
+			ResteasyWebTarget target = client.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/handshake");
+			ClasterRest cr = target.proxy(ClasterRest.class);
+			cr.sendACLMessage(message);
 		}
 		
 	}

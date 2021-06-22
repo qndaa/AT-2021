@@ -63,7 +63,6 @@ public class ATAgentBeanRest implements ATAgentRest {
 		ClasterRest cr = target.proxy(ClasterRest.class);
 		cr.reload();
 		
-		
 		return aid;
 	}
 

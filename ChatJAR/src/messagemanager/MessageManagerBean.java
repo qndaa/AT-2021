@@ -17,6 +17,7 @@ import javax.jms.Session;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 
+import agents.CachedAgentsRemote;
 import models.ACLMessage;
 import models.AID;
 import models.Performative;
@@ -31,7 +32,10 @@ public class MessageManagerBean implements MessageManager{
 
 	private Session session;
 	private MessageProducer defaultProducer;
-
+	
+	@EJB
+	CachedAgentsRemote car;
+	
 	@PostConstruct
 	public void postConstruct() {
 		session = factory.getSession();
@@ -61,7 +65,7 @@ public class MessageManagerBean implements MessageManager{
 	@Override
 	public void post(ACLMessage message) {
 		for (int i = 0; i < message.getReceivers().size(); i++) {
-			if(message.getReceivers().get(i) != null) {
+			if(message.getReceivers().get(i) != null && car.containsKey(message.getReceivers().get(i))) {
 				AID aid = message.getReceivers().get(i);
 				try {
 					ObjectMessage om = session.createObjectMessage(message);

@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 import agents.AgentClass;
+import models.ACLMessage;
 import models.AID;
 import models.AgentCenter;
 
@@ -70,4 +71,9 @@ public interface ClasterRest {
 	@Path("/reload")
 	public void reload();
 	
+	@POST
+	@Path("/messages")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void sendACLMessage(ACLMessage message);
 }

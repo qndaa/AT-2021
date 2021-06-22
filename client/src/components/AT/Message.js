@@ -1,6 +1,7 @@
 import React from "react";
 import {ACLMessage} from "../../model/ACLMessage";
 import at from "../../api/at";
+import handshake from "../../api/handshake";
 
 class Message extends React.Component {
 
@@ -27,10 +28,15 @@ class Message extends React.Component {
             this.message.receivers = this.state.aids;
             this.message.performative = this.state.performative;
             this.message.content = this.state.content;
-            at.post('agents/messages', this.message).then((response) => {
+            // at.post('agents/messages', this.message).then((response) => {
+            //     alert("Success!");
+            //     this.clearMessage();
+            // })
+            handshake.post('/messages', this.message).then(r => {
                 alert("Success!");
                 this.clearMessage();
-            })
+            });
+
         } else {
             alert("Wrong performative!");
         }
