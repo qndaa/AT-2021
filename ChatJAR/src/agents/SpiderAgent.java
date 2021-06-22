@@ -25,7 +25,6 @@ import util.NodeManager;
 
 @Stateful
 @Remote(Agent.class)
-@LocalBean
 public class SpiderAgent extends XjafAgent {
 	
 	

@@ -27,6 +27,7 @@ import models.AID;
 import models.AgentCenter;
 import models.Performative;
 import util.JSON;
+import util.NodeManager;
 
 @Stateless
 @Consumes(MediaType.APPLICATION_JSON)
@@ -51,29 +52,35 @@ public class GameRestBean implements GameRest {
 	@Override
 	public void getResult(String team1, String team2) {
 		gm.reset();
-		
-		System.out.println(team1);
-		System.out.println(team2);
+
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget rtarget = client.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/handshake");
 		ClasterRest cr = rtarget.proxy(ClasterRest.class);
 		cr.addNewNode(new AgentCenter(AgentCenter.MASTER_ADDRESS, 8080));
-		System.out.println(this.acmr.getAgentCenters());
 		
 		
-		
-		for (AgentCenter ac: this.acmr.getAgentCenters()) {
-			ResteasyWebTarget target = client.target("http://" + ac.getHost() + ":8080/ChatWAR/rest/games");
-			GameRest gr = target.proxy(GameRest.class);
-			gr.startSpider();
+		if (NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
+			for (AgentCenter ac: this.acmr.getAgentCenters()) {
+				ResteasyWebTarget target = client.target("http://" + ac.getHost() + ":8080/ChatWAR/rest/games");
+				GameRest gr = target.proxy(GameRest.class);
+				gr.startSpider();
+			}
 		}
-		
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		if (!NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
+			
+			ResteasyClient c = new ResteasyClientBuilder().build();
+			ResteasyWebTarget tar = c.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/games");
+			GameRest r = tar.proxy(GameRest.class);
+			r.saveSearch(g.);
+		
+		} 
 		
 
 		System.out.println("DJOLELEEEEE" + gm.getGames());

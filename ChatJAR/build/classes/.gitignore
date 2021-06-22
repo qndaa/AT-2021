@@ -1,8 +1,3 @@
-/rest/
-/agentcentermanager/
-/models/
-/messagemanager/
-/agents/
 /game/
-/META-INF/
-/agentmanager/
+/agents/
+/rest/
