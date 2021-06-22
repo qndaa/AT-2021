@@ -122,5 +122,11 @@ public class AgentManagerBean implements AgentManagerRemote {
 		cachedAgents.deleteAgent(aid);
 	}
 
+	@Override
+	public Agent getAgent(AID aid) {
+		// TODO Auto-generated method stub
+		return cachedAgents.getAgent(aid);
+	}
+
 
 }

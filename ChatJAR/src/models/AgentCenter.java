@@ -17,7 +17,7 @@ public class AgentCenter implements Serializable{
 	public static final AgentCenter LOCAL = null;
 	
 	public static final String MASTER_NODE = "qndaa-ideapad-5-14iil05";
-	public static final String MASTER_ADDRESS = "192.168.0.110";
+	public static final String MASTER_ADDRESS = "192.168.0.194";
 
 	private String host;
 	private int port;

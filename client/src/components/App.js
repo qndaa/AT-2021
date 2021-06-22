@@ -4,6 +4,7 @@ import Home from "./Home";
 import Chat from "./Chat";
 import Forbidden from "./Forbidden";
 import AT from "./AT";
+import Game from "./Game";
 
 class App extends React.Component {
 
@@ -148,6 +149,9 @@ class App extends React.Component {
                             <AT ref={this.child}/>
                         </Route>
                         <Route path={'/forbidden'} exact={true} component={Forbidden} />
+                        <Route path={'/game'} exact={true} component={Game} >
+
+                        </Route>
                     </div>
                 </BrowserRouter>
             </div>

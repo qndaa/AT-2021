@@ -76,4 +76,9 @@ public interface ClasterRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public void sendACLMessage(ACLMessage message);
+	
+	
+	
+	
+	
 }

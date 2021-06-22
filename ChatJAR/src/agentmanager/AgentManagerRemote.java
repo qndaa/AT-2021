@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import agents.Agent;
 import agents.AgentChatInt;
 import agents.AgentClass;
 import models.AID;
@@ -17,4 +18,5 @@ public interface AgentManagerRemote {
 	public AID startAgent(String type, String name);
 	public List<AID> getRunningAgents();
 	public void deleteAgent(AID aid);
+	public Agent getAgent(AID aid);
 }

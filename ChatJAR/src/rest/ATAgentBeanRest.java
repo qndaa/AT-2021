@@ -70,6 +70,10 @@ public class ATAgentBeanRest implements ATAgentRest {
 	@Override
 	public void deleteRunningAgent(AID aid) {
 		agm.deleteAgent(aid);
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		ResteasyWebTarget target = client.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/handshake");
+		ClasterRest cr = target.proxy(ClasterRest.class);
+		cr.reload();
 	}
 
 	@Override

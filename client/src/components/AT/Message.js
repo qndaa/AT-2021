@@ -1,6 +1,5 @@
 import React from "react";
 import {ACLMessage} from "../../model/ACLMessage";
-import at from "../../api/at";
 import handshake from "../../api/handshake";
 
 class Message extends React.Component {
