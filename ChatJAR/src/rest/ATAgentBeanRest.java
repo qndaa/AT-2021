@@ -22,6 +22,7 @@ import messagemanager.MessageManager;
 import models.ACLMessage;
 import models.AID;
 import models.AgentCenter;
+import models.Performative;
 
 @Stateless
 @LocalBean
@@ -73,12 +74,17 @@ public class ATAgentBeanRest implements ATAgentRest {
 
 	@Override
 	public void sendACLMessage(ACLMessage message) {
-		msm.post(message);
+		this.msm.post(message);
 	}
 
 	@Override
 	public List<String> getPerformatives() {
-		return msm.getPerformatives();
+		Performative[] performatives = Performative.values();
+		List<String> ret = new ArrayList<String>(performatives.length);
+		for (Performative p : performatives) {
+			ret.add(p.toString());
+		}
+		return ret;
 	}
 
 	

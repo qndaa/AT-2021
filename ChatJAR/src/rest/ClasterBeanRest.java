@@ -17,6 +17,7 @@ import agentcentermanager.AgentCenterManagerRemote;
 import agentmanager.AgentManagerRemote;
 import agents.AgentClass;
 import console.Console;
+import messagemanager.MessageManager;
 import models.ACLMessage;
 import models.AID;
 import models.AgentCenter;
@@ -32,16 +33,21 @@ public class ClasterBeanRest implements ClasterRest{
 	AgentCenterManagerRemote agentCenterManager;
 //	
 	//private List <AgentCenter> centers = new ArrayList<AgentCenter>();
-	
+	@EJB
+	MessageManager msm;
 	
 	@EJB
-	private Console console;
+	Console console;
 	
 	@EJB
 	AgentManagerRemote agentManager;
 	
 	@EJB
-	private ATAgentRest at;
+	ATAgentRest at;
+	
+	public ClasterBeanRest() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	@Override
@@ -246,7 +252,6 @@ public class ClasterBeanRest implements ClasterRest{
 			ClasterRest cr = target.proxy(ClasterRest.class);
 			cr.sendACLMessage(message);
 		}
-		
 	}
 	
 
