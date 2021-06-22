@@ -30,7 +30,12 @@ class Console extends React.Component {
                     const cont = msg.data.split('&')[1];
                     this.setState({consoleContent: this.state.consoleContent + new Date().toLocaleTimeString() + '---' + cont});
 
-                } else {
+                } else if (msg.data.startsWith('RELOAD')) {
+                    this.props.reload();
+                }
+
+
+                else {
                     console.log('onmessage console: Received: '+ msg.data);
                     consoleId = msg.data.split(":")[1];
                     localStorage.setItem('consoleId', consoleId);

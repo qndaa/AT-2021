@@ -7,6 +7,8 @@ import javax.ejb.Singleton;
 
 public class AgentCenter implements Serializable{
 
+	
+
 	/**
 	 * 
 	 */
@@ -71,6 +73,11 @@ public class AgentCenter implements Serializable{
 		if (port != other.port)
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "AgentCenter [host=" + host + ", port=" + port + "]";
 	}
 	
 	

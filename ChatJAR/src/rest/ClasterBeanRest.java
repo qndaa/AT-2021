@@ -3,17 +3,11 @@ package rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Schedule;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.ejb.Stateless;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -190,6 +184,41 @@ public class ClasterBeanRest implements ClasterRest{
 		console.echoTextMessage("Started agents on master: " + runningAgents);
 	}
 	
+	
+	@Override
+	public List<AID> getRunningAgents() {
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		List<AID> ret = new ArrayList<AID>();
+		for(AgentCenter ac: this.agentCenterManager.getAgentCenters()) {
+			ResteasyWebTarget target = client.target("http://" + ac.getHost() + ":8080/ChatWAR/rest/agents");
+			ATAgentRest cr = target.proxy(ATAgentRest.class);
+			ret.addAll(cr.getRunningAgents());
+		}
+		return ret;
+		
+	}
+
+	@Override
+	public void reload() {
+		System.out.println("OVDJE SMO");
+		if (NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
+			ResteasyClient client = new ResteasyClientBuilder().build();
+			for (AgentCenter ac : agentCenterManager.getAgentCenters()) {
+				if (!ac.getHost().equals(AgentCenter.MASTER_ADDRESS)) {
+					ResteasyWebTarget target = client.target("http://" + ac.getHost() + ":8080/ChatWAR/rest/handshake");
+					ClasterRest cr = target.proxy(ClasterRest.class);
+					cr.reload();
+				} else {
+					console.echoTextMessage("RELOAD");
+				}
+				
+			}
+			
+		} else {
+			console.echoTextMessage("RELOAD");
+		}
+		
+	}
 	
 
 }

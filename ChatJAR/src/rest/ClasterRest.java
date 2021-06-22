@@ -56,7 +56,18 @@ public interface ClasterRest {
 
 	@POST
 	@Path("/agents/running")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public void sendRunningAgent(List<AID> runningAgents);
+	
+	@GET
+	@Path("/agents/running")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<AID> getRunningAgents();
+
+	
+	@GET
+	@Path("/reload")
+	public void reload();
 	
 }

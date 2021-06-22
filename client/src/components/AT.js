@@ -22,15 +22,22 @@ class AT extends React.Component {
         await at.get('agents/messages').then((response) => {
             this.setState({performatives: response.data});
         });
-        await at.get('agents/running').then((agents) => {
-            this.setState({createdAgents: agents.data})
-        })
+        // await at.get('agents/running').then((agents) => {
+        //     this.setState({createdAgents: agents.data})
+        // })
         await at.get('agents/classes').then((classes) => {
             this.setState({classes: classes.data});
         });
 
         await handshake.post('/node', {
             "host": window.location.hostname, "port": 8080
+        }).then((response) => {
+
+        })
+
+        await handshake.get('/agents/running').then(response => {
+            console.log(response);
+            this.setState({createdAgents: response.data})
         })
 
         console.log(window.location);
@@ -100,7 +107,8 @@ class AT extends React.Component {
                     </div>
                 </div>
                 <div className={`w-100`}>
-                    <Console/>
+                    <Console reload={this.componentDidMount}>
+                    </Console>
                 </div>
             </div>
 

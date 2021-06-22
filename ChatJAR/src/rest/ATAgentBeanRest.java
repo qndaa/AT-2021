@@ -1,5 +1,6 @@
 package rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,11 +12,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+
 import agentmanager.AgentManagerRemote;
 import agents.AgentClass;
 import messagemanager.MessageManager;
 import models.ACLMessage;
 import models.AID;
+import models.AgentCenter;
 
 @Stateless
 @LocalBean
@@ -50,7 +56,15 @@ public class ATAgentBeanRest implements ATAgentRest {
 
 	@Override
 	public AID runningAgent(String type, String name) {
-		return agm.startAgent(type, name);
+		
+		AID aid = agm.startAgent(type, name);
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		ResteasyWebTarget target = client.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/handshake");
+		ClasterRest cr = target.proxy(ClasterRest.class);
+		cr.reload();
+		
+		
+		return aid;
 	}
 
 	@Override

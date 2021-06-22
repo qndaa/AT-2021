@@ -16,6 +16,8 @@ import agents.AgentClass;
 import models.ACLMessage;
 import models.AID;
 
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public interface ATAgentRest {
 	
 	@GET
@@ -43,6 +45,7 @@ public interface ATAgentRest {
 	
 	@GET
 	@Path("/messages")
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<String> getPerformatives();
 	
 
