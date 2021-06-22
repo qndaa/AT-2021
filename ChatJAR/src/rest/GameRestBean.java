@@ -65,24 +65,19 @@ public class GameRestBean implements GameRest {
 				GameRest gr = target.proxy(GameRest.class);
 				gr.startSpider();
 			}
-		}
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		if (!NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-			ResteasyClient c = new ResteasyClientBuilder().build();
-			ResteasyWebTarget tar = c.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/games");
-			GameRest r = tar.proxy(GameRest.class);
-			r.saveSearch(g.);
+			
+			
+			
 		
-		} 
-		
-
+		}
 		System.out.println("DJOLELEEEEE" + gm.getGames());
 
 	}
@@ -98,6 +93,24 @@ public class GameRestBean implements GameRest {
 		message.setContent("GAME");
 		System.out.println(JSON.g.toJson(message));
 		msm.post(message);
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (!NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
+			
+			ResteasyClient c = new ResteasyClientBuilder().build();
+			ResteasyWebTarget tar = c.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/games");
+			GameRest r = tar.proxy(GameRest.class);
+			r.saveSearch(gm.getGames());
+		
+		} 
+		
+		
 			
 	}
 	
