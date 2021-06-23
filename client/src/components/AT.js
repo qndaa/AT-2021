@@ -5,6 +5,7 @@ import CreatedAgents from "./AT/CreatedAgents";
 import Message from "./AT/Message";
 import Console from "./AT/Console";
 import handshake from "../api/handshake";
+import Game from "./AT/Game";
 
 class AT extends React.Component {
 
@@ -95,6 +96,11 @@ class AT extends React.Component {
                         </div>
                         <div>
                             <CreatedAgents deletedAgent={this.deleteAgent} createdAgents={this.state.createdAgents}/>
+                        </div>
+                        <div>
+                            <Game>
+
+                            </Game>
                         </div>
                     </div>
 

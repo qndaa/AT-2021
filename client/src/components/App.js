@@ -4,7 +4,7 @@ import Home from "./Home";
 import Chat from "./Chat";
 import Forbidden from "./Forbidden";
 import AT from "./AT";
-import Game from "./Game";
+import Game from "./AT/Game";
 
 class App extends React.Component {
 

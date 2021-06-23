@@ -2,25 +2,31 @@ package agents;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
+import console.Console;
 import game.Game;
 import models.ACLMessage;
+import models.Performative;
 
 @Stateful
 @Remote(Agent.class)
 @LocalBean
 public class MasterAgent extends XjafAgent {
 	
-	
+	@EJB
+	Console console;
 	
 
 	@Override
 	public void handleMessage(ACLMessage msg) {
-		// TODO Auto-generated method stub
-		
+
+		if (msg.getPerformative().equals(Performative.INFORM)) {
+			console.echoTextMessage(msg.getContent());
+		}
 	}
 
 	@Override

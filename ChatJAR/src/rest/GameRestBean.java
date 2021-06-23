@@ -68,51 +68,33 @@ public class GameRestBean implements GameRest {
 		ClasterRest cr = rtarget.proxy(ClasterRest.class);
 		cr.addNewNode(new AgentCenter(AgentCenter.MASTER_ADDRESS, 8080));
 		
-		List<AID> aids = new ArrayList<AID>();
+		
+		List<Game> data = new ArrayList<Game>();
+		
 		if (NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
 			for (AgentCenter ac: this.acmr.getAgentCenters()) {
 				ResteasyWebTarget target = client.target("http://" + ac.getHost() + ":8080/ChatWAR/rest/games");
 				GameRest gr = target.proxy(GameRest.class);
-//				AID aid = gr.runningAgent("SpiderAgent", "GAME@"+ ac.getHost());
-//				System.out.println(aid);
-//				aids.add(aid);
 				
 				List<Game> ret = gr.startSpider();
 				
-				
-				System.out.println(ret);
-				
-				
-				
+				if (ret != null) {
+					data.addAll(ret);
+				}
 				
 			}	
-//			ACLMessage message = new ACLMessage();
-//			message.setReceivers(aids);
-//			message.setPerformative(Performative.REQUEST);
-//			message.setContent("GAME");
-//			cr.sendACLMessage(message);
-//			
-//			try {
-//				Thread.sleep(2000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		
-//			for (AgentCenter ac: this.acmr.getAgentCenters()) {
-//		
-//			
-//				
-//				ResteasyClient c = new ResteasyClientBuilder().build();
-//				ResteasyWebTarget tar = c.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/games");
-//				GameRest r = tar.proxy(GameRest.class);
-//				
-//				for (AID a: aids) {
-//					List<Game> ret = r.getData(a);
-//					System.out.println(ret);
-//
-//				}
-//			}
+			
+			System.out.println(data);
+
+			
+			
+			
+			Agent master = JNDILookup.lookUp(JNDILookup.MasterAgentLookup, Agent.class);
+			ACLMessage message = new ACLMessage();
+			message.setPerformative(Performative.INFORM);
+			message.setContent("GAME: " + team1 + " VS " + team2 + " WINNER IS: ");
+			master.handleMessage(message);
+			
 			
 		}
 
@@ -124,44 +106,14 @@ public class GameRestBean implements GameRest {
 		System.out.println("Starting spider...");
 		
 		Agent agent = JNDILookup.lookUp(JNDILookup.SpiderAgentLookup, Agent.class);
-		
-		
-		
-		
-		
-		
-//		AID aidSpider = amr.startAgent("SpiderAgent", "Game");
-//		
+			
 		ACLMessage message = new ACLMessage();
 		message.setReceivers(new ArrayList<AID>());
 		message.setPerformative(Performative.REQUEST);
 		message.setContent("GAME");
 		agent.handleMessage(message);
 		
-		return agent.getGames();
-//		//System.out.println(JSON.g.toJson(message));
-//		msm.post(message);
-//		
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		System.out.println(gm.getGames());
-//		
-//		if (!NodeManager.getNodeName().equals(AgentCenter.MASTER_NODE)) {
-//			
-//			ResteasyClient c = new ResteasyClientBuilder().build();
-//			ResteasyWebTarget tar = c.target("http://" + AgentCenter.MASTER_ADDRESS + ":8080/ChatWAR/rest/games");
-//			GameRest r = tar.proxy(GameRest.class);
-//			r.saveSearch(gm.getGames());
-//		
-//		} 
-		
-		
-			
+		return agent.getGames();			
 	}
 	
 	@Override

@@ -1,5 +1,5 @@
 import React from "react";
-import at from "../api/at";
+import at from "../../api/at";
 
 class Game extends React.Component {
 
