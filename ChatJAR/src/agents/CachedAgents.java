@@ -71,6 +71,22 @@ public class CachedAgents implements CachedAgentsRemote {
 		return this.runningAgents.get(aid);
 	}
 
+	@Override
+	public List<SpiderAgent> getSpiderAgents() {
+		
+		ArrayList<SpiderAgent> ret = new ArrayList<SpiderAgent>();
+		
+		for (Agent a: runningAgents.values()) {
+			
+			if (a instanceof SpiderAgent) {
+				System.out.println("IMAMO SPIDERA");
+				ret.add((SpiderAgent)a);
+			}
+		}
+
+		return ret;
+	}
+
 	
 	
 	

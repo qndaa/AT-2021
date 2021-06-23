@@ -16,5 +16,7 @@ public interface CachedAgentsRemote {
 	void deleteAgent(AID aid);
 	
 	Agent getAgent(AID aid);
+	
+	List<SpiderAgent> getSpiderAgents();
 
 }

@@ -1,7 +1,10 @@
 package agents;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
+import game.Game;
 import models.ACLMessage;
 import models.AID;
 
@@ -15,4 +18,5 @@ public interface Agent {
 	public void init(AID aid);
 	public void handleMessage(ACLMessage msg);
 	public AID getAID();
+	public List<Game> getGames();
 }

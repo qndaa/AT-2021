@@ -1,6 +1,7 @@
 package models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,7 +45,24 @@ public class ACLMessage implements Serializable {
 	
 	private long replyBy;
 	
-	public ACLMessage() {}
+	public ACLMessage() {
+		
+		this.performative = Performative.NOT_UNDERSTOOD;
+		this.sender = null;
+		this.receivers = new ArrayList<AID>();
+		this.replyTo = null;
+		this.content = "";
+		this.contentObj = null;
+		this.userArg = new HashMap<String, Serializable>();
+		this.language = "";
+		this.encoding = "";
+		this.ontology = "";
+		this.protocol = "";
+		this.conversationId = "";
+		this.replyWith = "";
+		this.inReplyTo = "";
+		this.replyBy = 0L;
+	}
 	
 	
 	

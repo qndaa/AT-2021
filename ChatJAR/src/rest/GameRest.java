@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import game.Game;
+import models.AID;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -25,7 +26,7 @@ public interface GameRest {
 	
 	@POST
 	@Path("/start/spider")
-	public void startSpider();
+	public List<Game> startSpider();
 	
 	@GET
 	@Path("/save")
@@ -34,5 +35,9 @@ public interface GameRest {
 	@GET
 	@Path("/prediction")
 	public void startPrediction();
+	
+	@POST
+	@Path("/getData")
+	public List<Game> getData(AID aid);
 	
 }

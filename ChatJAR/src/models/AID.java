@@ -95,6 +95,14 @@ public class AID implements Serializable{
 	public String getStr() {
 		return str;
 	}
+
+
+	@Override
+	public String toString() {
+		return "AID [name=" + name + ", host=" + host + ", agentType=" + agentType + ", str=" + str + "]";
+	}
+	
+	
 	
 	
 	

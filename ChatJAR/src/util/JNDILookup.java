@@ -6,7 +6,9 @@ import javax.naming.NamingException;
 
 import agentmanager.AgentManagerBean;
 import agentmanager.AgentManagerRemote;
+import agents.Agent;
 import agents.AgentChatInt;
+import agents.SpiderAgent;
 import agents.UserAgent;
 import chatmanager.ChatManagerBean;
 import chatmanager.ChatManagerRemote;
@@ -26,6 +28,7 @@ public abstract class JNDILookup {
 			ChatManagerRemote.class.getName();
 	//public static final String ChatAgentLookup = JNDIPathChat + ChatAgent.class.getSimpleName() + "!"
 	//		+ Agent.class.getName() + "?stateful";
+	public static final String SpiderAgentLookup = JNDIPathChat + SpiderAgent.class.getSimpleName() + "!" + Agent.class.getName() + "?stateful";
 
 	public static <T> T lookUp(String name, Class<T> c) {
 		T bean = null;
