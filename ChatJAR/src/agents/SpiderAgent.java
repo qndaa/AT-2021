@@ -53,6 +53,13 @@ public class SpiderAgent extends XjafAgent {
 		// TODO Auto-generated method stub
 		return this.games;
 	}
+
+
+	@Override
+	public String getWinner() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

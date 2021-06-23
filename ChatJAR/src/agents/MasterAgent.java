@@ -35,4 +35,10 @@ public class MasterAgent extends XjafAgent {
 		return null;
 	}
 
+	@Override
+	public String getWinner() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

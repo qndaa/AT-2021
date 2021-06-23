@@ -32,4 +32,10 @@ public class ChatAgent extends XjafAgent{
 		return null;
 	}
 
+	@Override
+	public String getWinner() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

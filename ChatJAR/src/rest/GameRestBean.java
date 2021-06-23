@@ -85,14 +85,20 @@ public class GameRestBean implements GameRest {
 			}	
 			
 			System.out.println(data);
-
 			
+			Agent prediction = JNDILookup.lookUp(JNDILookup.PredictionAgentLookup, Agent.class);
+			
+			ACLMessage messagePred = new ACLMessage();
+			messagePred.setPerformative(Performative.PROPAGATE);
+			messagePred.setContent(team1 + "-" + team2);
+			messagePred.setContentObj(data);
+			prediction.handleMessage(messagePred);
 			
 			
 			Agent master = JNDILookup.lookUp(JNDILookup.MasterAgentLookup, Agent.class);
 			ACLMessage message = new ACLMessage();
 			message.setPerformative(Performative.INFORM);
-			message.setContent("GAME: " + team1 + " VS " + team2 + " WINNER IS: ");
+			message.setContent("GAME: " + team1 + " VS " + team2 + " WINNER IS: " + prediction.getWinner());
 			master.handleMessage(message);
 			
 			

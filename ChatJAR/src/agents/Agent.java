@@ -19,4 +19,5 @@ public interface Agent {
 	public void handleMessage(ACLMessage msg);
 	public AID getAID();
 	public List<Game> getGames();
+	public String getWinner();
 }
